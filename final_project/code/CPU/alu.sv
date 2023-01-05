@@ -45,7 +45,7 @@ logic [15:0] y_intr;
 	);
 	
 	always_comb zr = (out == 16'b0) ? 1'b1:1'b0;
-	always_comb ng = (out <  16'b0) ? 1'b1:1'b0;
+	always_comb ng = (out[15] == 1'b1) ? 1'b1:1'b0;
 	
 
 

@@ -43,8 +43,8 @@ always @(zx,nx,zy,ny,f,no) begin
 end
 	
 	always_comb zr = (out == 16'b0) ? 1'b1:1'b0;
-	always_comb ng = (out <  16'b0) ? 1'b1:1'b0;
+	always_comb ng = (out[15] ==  1'b1) ? 1'b1:1'b0;
 	
 
 
-endmodule; // alu_exp
+endmodule // alu_exp
