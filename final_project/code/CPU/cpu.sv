@@ -1,7 +1,3 @@
-`include "register.sv"
-`include "alu.sv"
-`include "jump_condition.sv"
-`include "pc.sv"
  module cpu (
 	input   logic clk,
 	input   logic rst_n,
@@ -29,16 +25,20 @@
 	logic 		 jump_ind; // indicates if jump condetion has acouerd 
 	
 	//-=-=-=-=-=-=-=-=-=-=- Combinatorial Logic -=-=-=-=-=-=-=-=-=---=-=-=-=-=-=-=
+	// A instruction is characterized when instruction[15]="0"
+	// C instruction is characterized when instruction[15]="1"
+	// 		instruction[5]=d2 - write enable for Aregister
+	// 		instruction[4]=d1 - write enable for Dregister
+	//	    instruction[3]=d0 - write enable for RAM[A]
 	
-	
-	always_comb load_A = ~instruction[15] | instruction[5];   // for C instruction bit 5 and for A instruction Not bit 15
-	always_comb load_D = instruction[15] & instruction[4];    // for C (bit 15)instruction bit 4 only 
+	// load to registers
+	always_comb load_A = ~instruction[15] | instruction[5];    // for C instruction[5] (d2) and for A instruction Not bit 15
+	always_comb load_D =  instruction[15] & instruction[4];    // for C instruction[4] (d1) 
+	always_comb writeM =  instruction[15] & instruction[3];    // only for C instruction when d0 (instruction[3])="1" and enablemnt of write to RAM
+	// select for Muxes 
+	always_comb y_alu_in = instruction[12] ? inM : A_reg;         // (Mux_b) inpuut to the alu 
+	always_comb a_reg_in = instruction[15] ? alu_out:instruction; // (Mux_a) inpuut to A register
 
-	always_comb y_alu_in = instruction[12] ? inM : A_reg;    // (Mux_b) inpuut to the alu 
-	
-	always_comb a_reg_in = instruction[15] ? instruction : alu_out; // (Mux_a) inpuut to A register
-
-	always_comb writeM = instruction[15] & instruction[3];    // enablemnt of write to RAM
 
 	always_comb addressM = A_reg[14:0];
 	
@@ -95,8 +95,8 @@
 	(
 			.clk(clk),
 			.rst_n(rst_n),
-			.load(jump_ind),         // detrmined by jump condition
-			.clr('0),				 // clear counter
+			.load(jump_ind & instruction[15]),         // detrmined by jump condition the AND is for masking jump_ind in A instruction
+			.clr('0),				                  // clear counter not used here 
 			.data_in(A_reg),
 			.data_out(pc)
 	);	
