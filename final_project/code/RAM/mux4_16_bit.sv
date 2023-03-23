@@ -1,5 +1,5 @@
 module mux4_16_bit (
-	input 	logic [1:0][15:0]data_in,
+	input 	logic [3:0][15:0]data_in,
 	input   logic [1:0]		 sel ,
 	output  logic [15:0]     data_out
 	);

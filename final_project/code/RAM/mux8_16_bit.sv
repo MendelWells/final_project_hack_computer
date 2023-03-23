@@ -1,5 +1,5 @@
 module mux8_16_bit (
-	input 	logic [2:0][15:0]data_in ,
+	input 	logic [7:0][15:0]data_in ,
 	input   logic [2:0]      sel ,
 	output  logic [15:0]     data_out
 	);
