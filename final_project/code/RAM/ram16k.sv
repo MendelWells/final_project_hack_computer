@@ -25,7 +25,7 @@ module ram16k(
 			// demux to set the load of the register according to right the the addres only 0-3 in use
 	demux8 demux8_inst(
 		.din(1'b01),
-		.sel({1b'0,address[13:12]}),
+		.sel({1'b0,address[13:12]}), 
 		.Y(Y)
 		);
 	
@@ -36,7 +36,7 @@ module ram16k(
     		(
 	    		.clk(clk),
 				.rst_n(rst_n),
-				.load(Y),
+				.load(Y[i]& load),
 				.address(address[11:0]),
 				.data_in(data_in), 
 				.data_out(mem[i])

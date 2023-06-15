@@ -36,7 +36,7 @@ module ram64(
     		(
 	    		.clk(clk),
 				.rst_n(rst_n),
-				.load(Y[i]),
+				.load(Y[i]& load),
 				.address(address[2:0]),
 				.data_in(data_in), 
 				.data_out (mem[i])

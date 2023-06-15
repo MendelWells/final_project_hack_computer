@@ -35,7 +35,7 @@ module ram8(
     		(
 	    		.clk(clk),
 				.rst_n(rst_n),
-				.load(Y[i] & load),
+				.load(Y[i]& load ),
 				.data_in(data_in), 
 				.data_out (mem[i])
 			);

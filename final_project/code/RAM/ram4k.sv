@@ -20,7 +20,7 @@ module ram4k(
 		// demux to set the load of the register according to right the the address
 	demux8 demux8_inst(
 		.din(1'b01),
-		.sel(address[5:3]),
+		.sel(address[11:9]),
 		.Y(Y)
 		);
 	
@@ -32,7 +32,7 @@ module ram4k(
     		(
 	    		.clk(clk),
 				.rst_n(rst_n),
-				.load(Y[i]),
+				.load(Y[i]& load),
 				.address(address[8:0]),
 				.data_in(data_in), 
 				.data_out(mem[i])
