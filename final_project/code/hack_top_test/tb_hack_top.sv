@@ -14,6 +14,7 @@ logic [16384 -1 :0][15:0] mem;
 // Clock generation
 always #5 clk = ~clk;
 
+integer f1; // - ////////////////////////// -
 
 always @(*)begin
 /* using instance of mem to reflect a memory
