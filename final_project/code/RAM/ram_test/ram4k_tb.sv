@@ -5,16 +5,16 @@ module ram4k_tb();
 	logic clk;
 	logic rst_n;
 	logic load;
-	logic [8:0] address;
+	logic [11:0] address;
 	logic [15:0] data_in;
 	
 	// Outputs
 	logic [15:0] data_out;
 
-	logic [4000-1:0][15:0] tb_mem;
+	logic [4095:0][15:0] tb_mem;
 	always_ff @( posedge clk or negedge rst_n) begin
 		if(~rst_n)
-		  tb_mem <= 4000'b0;
+		  tb_mem <= 4095'b0;
 		else
 			tb_mem[address] <= data_out;
 		end	
@@ -53,32 +53,32 @@ module ram4k_tb();
 		
 		// Read data from memory
 		load = 1;
-		address = 9'h0;
+		address = 12'h0;
 		data_in =  16'h1234;
 		//#( PERIOD) assert(data_out == 16'h1234);
 		#(2* PERIOD)
-		address = 9'h5;
+		address = 12'd2500;
 		data_in = 16'h5678;
 		#(2 * PERIOD)
 		//#(PERIOD) assert(data_out == 16'h5678);
 		// Write more data to memory
-		address = 9'd300;
+		address = 12'd3000;
 		data_in = 16'habcd;
 		#(2 * PERIOD)
 		//#(PERIOD) assert(data_out == 16'habcd);
 		#(2 * PERIOD)
 		// write to same address
-		address = 9'd450;
+		address = 12'd450;
 		data_in = 16'hdcba;
 		#(2 * PERIOD)
 		// write to same address with out load 
-		address = 9'd62;
+		address = 12'd662;
 		load = 1'b0;
 		data_in = 16'hbbbb;
 		//#(PERIOD) assert(data_out == 16'hdcba);
 		#(2 * PERIOD)
 		load = 1;
-		address = 9'h70;
+		address = 12'h707;
 		data_in  = 16'hdef0;
 		//#(PERIOD) assert(data_out == 16'hdef0);
 		

@@ -11,10 +11,10 @@ module ram16k_tb();
 	// Outputs
 	logic [15:0] data_out;
 
-	logic [16_000-1:0][15:0] tb_mem;
+	logic [16383:0][15:0] tb_mem;
 	always_ff @( posedge clk or negedge rst_n) begin
 		if(~rst_n)
-		  tb_mem <= 16_000'b0;
+		  tb_mem <= 16384'b0;
 		else
 			tb_mem[address] <= data_out;
 		end	
@@ -57,7 +57,7 @@ module ram16k_tb();
 		data_in =  16'h1234;
 		//#( PERIOD) assert(data_out == 16'h1234);
 		#(2* PERIOD)
-		address = 14'h5;
+		address = 14'h5000;
 		data_in = 16'h5678;
 		#(2 * PERIOD)
 		//#(PERIOD) assert(data_out == 16'h5678);
@@ -68,17 +68,17 @@ module ram16k_tb();
 		//#(PERIOD) assert(data_out == 16'habcd);
 		#(2 * PERIOD)
 		// write to same address
-		address = 14'd450;
+		address = 14'd45000;
 		data_in = 16'hdcba;
 		#(2 * PERIOD)
 		// write to same address with out load 
-		address = 14'd62;
+		address = 14'd10_000;
 		load = 1'b0;
 		data_in = 16'hbbbb;
 		//#(PERIOD) assert(data_out == 16'hdcba);
 		#(2 * PERIOD)
 		load = 1;
-		address = 14'h70;
+		address = 14'h7000;
 		data_in  = 16'hdef0;
 		//#(PERIOD) assert(data_out == 16'hdef0);
 		
