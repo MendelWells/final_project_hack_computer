@@ -2107,12 +2107,17 @@ reset = 0;
 // Deassert reset
 reset = 1;
 
-// Provide test vectors
-// TODO: Add your test vectors here
+// write mem vector to file, to see what in memory
+f1 = $fopen("tb_mem1.txt","w");
+$fwrite(f1,"%h",mem);
 
 // Wait for simulation to complete
 #100000000;
+
+$fwrite(f1,"%h",mem);
+$fclose(f1);
 $finish;
+
 end
 
 
