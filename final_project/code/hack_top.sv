@@ -1,7 +1,8 @@
 module hack_top(
 	// clock and reset 
 	input   logic 		 clk, 
-	input   logic 		 reset
+	input   logic 		 reset,
+	output  logic  [15:0] led
 );
     //-=-=-=-=-=-=-=-=-=-=- Internal signals =-=-=-=-=-=-=-=-=---=-=
 	
@@ -36,24 +37,24 @@ module hack_top(
 	assign ram_address = cpu_addressM;
 	assign ram_ena     = cpu_writeM;
 	
+	assign led = ram_data_out;
+
 
 	
-	// ROM instance
-	/*blk_mem_gen_0 rom_inst (
-	  .clka(clk),    // input wire clka
-	  .addra(rom_address),  // input wire [14 : 0] addra
-	  .douta(rom_instruction)  // output wire [15 : 0] douta
+	blk_mem_gen_0 rom_32k (
+  .clka(clk),    // input wire clka
+  .addra(rom_address),  // input wire [14 : 0] addra
+  .douta(rom_instruction)  // output wire [15 : 0] douta
 	);
-	*/
-	
-	//small rom
-	
+
+/*
+//small rom
 	rom_8 rom_8_inst
 	(
 	.adrs(rom_address[2:0]),
 	.data(rom_instruction)
 	);
-	
+*/	
 	// CPU instance
 	cpu cpu_inst
 	(
@@ -75,14 +76,16 @@ module hack_top(
 	blk_mem_gen_1 ram_inst (
 	  .clka(clk),                    // input wire clka
 	  .rsta(reset),                  // input wire rsta
-	  .ena(ram_ena),                 // input wire ena
-	  .wea(1'b1),                    // input wire [0 : 0] wea
+	  .ena(1'b1),                 // input wire ena
+	  .wea(ram_ena),                    // input wire [0 : 0] wea
 	  .addra(ram_address),           // input wire [13 : 0] addra
 	  .dina(ram_data_in),            // input wire [15 : 0] dina
 	  .douta(ram_data_out),          // output wire [15 : 0] douta
 	  .rsta_busy()  				 // output wire rsta_busy
 	);
+		
 	*/
+	
 	
 	ram16k ram16k_inst( 
 		.clk(clk),
