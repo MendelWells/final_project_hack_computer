@@ -17,4 +17,4 @@ always_comb out_intr = f ? (a+b) : (a&b);
 always_comb out  	 = no ? (~out_intr):out_intr;
 
 
-endmodule; // alu
+endmodule
