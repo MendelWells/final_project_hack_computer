@@ -3,7 +3,15 @@ module rom_8
   input      [2:0] adrs,
   output reg [15:0] data
 );
-
+/* assambly
+@0 //000 0000000 000 000
+D=1//111 0111111 010 000
+A=D
+M=D
+D=D+1
+@2
+0;JMP
+*/
 always @(*)
   case (adrs)
     0: data =16'b0000000000000000; 

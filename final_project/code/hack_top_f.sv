@@ -49,7 +49,7 @@ module hack_top(
 */
 
 //small rom
-	rom_8 rom_8_inst
+	rom_32 rom_32_inst
 	(
 	.adrs(rom_address[2:0]),
 	.data(rom_instruction)

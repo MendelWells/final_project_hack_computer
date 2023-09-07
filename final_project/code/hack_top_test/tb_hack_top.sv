@@ -2100,13 +2100,13 @@ initial begin
 // Initialize inputs
 
 clk = 0;
-reset = 0;
+reset = 1;
 
 // Wait for a few clock cycles
 #10;
 
 // Deassert reset
-reset = 1;
+reset = 0;
 
 // write mem vector to file, to see what in memory
 f1 = $fopen("tb_mem1.txt","w");
