@@ -1,17 +1,21 @@
 module register(
 	input	logic 		clk,
-	input	logic 		rst_n,
+	input	logic 		rst,
 	input	logic 		load,
 	input	logic [15:0]data_in,
 	output	logic [15:0]data_out 
 	
 	);
 	
-	always_ff @(posedge clk or negedge rst_n) begin
-		if (~rst_n)
-			data_out <=16'b0;
+	logic [15:0] data;
+	
+	always @(posedge clk or posedge rst) begin
+		if (rst)
+			data <=16'b0;
 		else if (load)
-			data_out <= data_in[15:0];
+			data <= data_in[15:0];
 	end 
+	
+	always_comb data_out = data;
 	
 endmodule// register

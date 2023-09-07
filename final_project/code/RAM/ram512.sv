@@ -1,8 +1,8 @@
 module ram512(
 		input	logic clk,
-		input	logic rst_n,
+		input	logic rst,
 		input	logic load,
-		input	logic [8:0]address  ,
+		input	logic [8:0]addres  ,
 		input	logic [15:0]data_in  ,
 		output	logic [15:0]data_out 
 	);
@@ -10,20 +10,12 @@ module ram512(
 	//------------------------------
 	//     internal signals  
 	//------------------------------
-	logic 	[7:0][15:0]mem	;
-	logic   [7:0]Y;
-
+	logic 	[2:0][15:0]mem	;
 	
 	
     //------------------------------
 	//     block instance   
 	//------------------------------
-			// demux to set the load of the register according to right the the address
-	demux8 demux8_inst(
-		.din(1'b01),
-		.sel(address[8:6]),// 110010
-		.Y(Y)
-		);
 	
 	
 	genvar             i;
@@ -32,9 +24,9 @@ module ram512(
     		ram64 ram64_inst
     		(
 	    		.clk(clk),
-				.rst_n(rst_n),
-				.load(Y[i]& load),
-				.address(address[5:0]),
+				.rst(rst),
+				.load(load),
+				.addres(addres[5:0]),
 				.data_in(data_in), 
 				.data_out(mem[i])
 			);
@@ -47,7 +39,7 @@ module ram512(
 	
 	mux8_16_bit  mux8_16_bit_inst(
 		.data_in (mem),
-		.sel (address[8:6]),
+		.sel (addres[8:6]),
 		.data_out(data_out)
 		);
 	

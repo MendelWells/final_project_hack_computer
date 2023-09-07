@@ -1,7 +1,7 @@
 
 module ram8(
 		input	logic 	      clk,
-		input	logic 	      rst_n,
+		input	logic 	      rst,
 		input	logic         load,
 		input	logic   [2:0 ]address,
 		input	logic   [15:0]data_in,
@@ -34,8 +34,8 @@ module ram8(
     		register register_inst
     		(
 	    		.clk(clk),
-				.rst_n(rst_n),
-				.load(Y[i]& load ),
+				.rst(rst),
+				.load(Y[i] & load),
 				.data_in(data_in), 
 				.data_out (mem[i])
 			);
