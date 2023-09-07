@@ -3,17 +3,30 @@ module alu(
 	input   logic [15:0] x,
 	input   logic [15:0] y,
 	// ctrl inputs
-	input   logic 		 zx, // if zx then  x   = 0
-	input   logic 		 nx, // if nx then  x   = ~x 
-	input   logic 		 zy, // if zy then  y   = 0
-	input   logic 		 ny, // if ny then  y   = ~y 
-	input   logic 		 f,  // if f  then  out = x+y else out = x&y
-	input	logic 		 no, // if no then  out = ~out
+	input   logic [5:0] alu_op, 
 	// output of alu
-	output  logic [15:0] out, // output value from alu 
+	output  logic [15:0] out,       // output value from alu 
 	output  logic        zr,		//	is '1' if out ==0
-	output  logic        ng		//  is '1' when out<0
+	output  logic        ng		    //  is '1' when out<0
 );
+
+
+    logic 	zx; // if zx then  x   = 0
+	logic 	nx; // if nx then  x   = ~x 
+	logic 	zy; // if zy then  y   = 0
+	logic 	ny; // if ny then  y   = ~y 
+	logic 	f;  // if f  then  out = x+y else out = x&y
+	logic 	no; // if no then  out = ~out
+
+
+    always_comb  zx = alu_op[5]; 
+	always_comb  nx = alu_op[4]; 
+	always_comb  zy = alu_op[3]; 
+	always_comb  ny = alu_op[2]; 
+	always_comb  f  = alu_op[1];  
+	always_comb  no = alu_op[0]; 
+	
+	
 logic [15:0] x_intr;
 logic [15:0] y_intr;
 
@@ -49,4 +62,4 @@ logic [15:0] y_intr;
 	
 
 
-endmodule // alu
+endmodule; // alu

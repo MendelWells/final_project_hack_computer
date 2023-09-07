@@ -1,11 +1,19 @@
 module jump_condition(
-		input  logic j0,
-		input  logic j1,
-		input  logic j2,
-		input  logic zr,
-		input  logic ng,
-		output logic jump
+		
+		input  logic [2:0] jjj,  // bits to determine what condition is required ( JGE, JLT, JNE,...)
+		input  logic       zr,   // indicate that alu out is equal to zero
+		input  logic       ng,   // indicate that alu out is less than zero
+		output logic       jump
 );
+
+logic j0;
+logic j1;
+logic j2;
+
+
+always_comb j0 = jjj[0];
+always_comb j1 = jjj[1];
+always_comb j2 = jjj[2];
 
 
     always @ ( j0 , j1 , j2, ng , zr) begin

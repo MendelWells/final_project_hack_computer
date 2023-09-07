@@ -18,4 +18,4 @@ always_comb  a_intr = za ? 16'b0 : a;
 always_comb  out_a = na?(~a_intr):a_intr;
 
 
-endmodule
+endmodule; 
