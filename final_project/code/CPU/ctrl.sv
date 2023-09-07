@@ -1,7 +1,7 @@
 module ctrl(
 // CAR
 input  logic        clk,
-input  logic        rst_n,
+input  logic        rst,
 // From RAM
 input  logic  [15:0]inM,
 // From ROM
@@ -85,7 +85,7 @@ output  logic [14:0] pc
     register A_register
 	(
 	 		.clk(clk),
-	 		.rst_n(rst_n),
+	 		.rst(rst),
 	 		.load(load_A),
 			.data_in(a_reg_in),
 			.data_out(A_reg) 
@@ -94,7 +94,7 @@ output  logic [14:0] pc
 	register D_register
 	(
 	 		.clk(clk),
-	 		.rst_n(rst_n),
+	 		.rst(rst),
 	 		.load(load_D),
 			.data_in(d_reg_in),
 			.data_out(D_reg) 
@@ -114,7 +114,7 @@ output  logic [14:0] pc
 	pc pc_inst 
 	(
 			.clk(clk),
-			.rst_n(rst_n),
+			.rst(rst),
 			.load(jump_ind & C_instruction),         // determined by jump condition the AND is for masking jump_ind in A instruction			
 			.data_in(A_reg[14:0]),
 			.data_out(pc)

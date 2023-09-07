@@ -1,0 +1,26 @@
+
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/a_op.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/alu.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/alu_expected.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/alu_op_out.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/alu_tb_edge.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/cpu.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/ctrl.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/jump_condition.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/pc.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/register.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/cpu_test/testbenchCj.sv}
+vlog -reportprogress 300 -work work {C:/Users/awells/Desktop/final_project_hack_computer-main-change reset and control/final_project/code/CPU/cpu_test/testbenchCj.sv}
+vsim -voptargs=+acc=lprn testbenchCj
+add wave -position insertpoint  \
+sim:/testbenchCj/clk \
+sim:/testbenchCj/rst
+add wave -position insertpoint  \
+sim:/testbenchCj/pc
+add wave -position insertpoint  \
+sim:/testbenchCj/dut/alu_inst/zr \
+sim:/testbenchCj/dut/alu_inst/ng \
+sim:/testbenchCj/jjj
+
+
+
